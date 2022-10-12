@@ -1,5 +1,6 @@
 import * as core from '@actions/core'
 import * as fs from 'fs'
+import * as k8s from '@kubernetes/client-node'
 import {KubeConfig} from '@kubernetes/client-node'
 import {getDefaultKubeconfig} from './kubeconfigs/default'
 import {getArcKubeconfig} from './kubeconfigs/arc'
@@ -97,3 +98,5 @@ export function createKubeconfig(
    )
    return kc.exportConfig()
 }
+
+export function listClusterPods() {}
