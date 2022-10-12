@@ -99,4 +99,20 @@ export function createKubeconfig(
    return kc.exportConfig()
 }
 
-export function listClusterPods() {}
+export function listClusterPods() {
+   const kc = new k8s.KubeConfig()
+   kc.loadFromDefault()
+
+   const k8sApi = kc.makeApiClient(k8s.CoreV1Api)
+
+   try {
+      k8sApi
+         .listNamespacedPod('default')
+         .then((res) => {
+            console.log(res.body)
+         })
+         .catch()
+   } catch (e) {
+      core.error('')
+   }
+}
