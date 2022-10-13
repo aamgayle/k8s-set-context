@@ -23,9 +23,6 @@ jobs:
          - name: Build
            run: npm run build
          - name: Check Creds
-           with:
-              creds: ${{secrets.AZURE_CREDENTIALS}}
-              environment: 'AKS-SET-CONTEXT'
          - run: |
               echo ${{secrets.AZURE_CREDENTIALS}}
          - name: Azure Login
