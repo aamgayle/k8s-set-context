@@ -1,4 +1,4 @@
-name: 'Kubernetes Set Context'
+name: 'Kubernetes Set Context Testing'
 description: 'Set the context of a target Kubernetes cluster and export the kubeconfig which is used by subsequent actions'
 inputs:
    # Please ensure you have used azure/login in the workflow before this action
