@@ -1,15 +1,20 @@
 name: Run Integration Tests
-on:
-   pull_request:
-      branches:
-         - main
-         - 'releases/*'
-   push:
-      branches:
-         - main
-         - 'releases/*'
+on: [push]
+
+name: AzureLoginSample
 
 jobs:
+   build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - run: |
+        az webapp list --query "[?state=='Running']"
+
    AKS-method-integration-test:
       runs-on: ubuntu-latest
       steps:
@@ -23,13 +28,13 @@ jobs:
          - name: Build
            run: npm run build
          - name: Check Creds
+
            run: |
               echo ${{secrets.AZURE_CREDENTIALS}}
          - name: Azure Login
            uses: azure/login@v1
            with:
               creds: ${{ secrets.AZURE_CREDENTIALS }}
-              environment: 'AKS-SET-CONTEXT'
          - name: Set Context
            uses: aamgayle/k8s-set-context@v4.6
            with:
