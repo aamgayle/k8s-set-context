@@ -19,7 +19,7 @@ jobs:
            with:
               creds: ${{ secrets.AZURE_CREDENTIALS }}
          - name: Set Context
-           uses: aamgayle/k8s-set-context@v4.6
+           uses: aamgayle/k8s-set-context@v4.7
            with:
               resource-group: 'asgayle-test2'
               cluster-type: 'aks'
