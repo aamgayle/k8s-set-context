@@ -66,9 +66,6 @@ jobs:
                      user:
                        password: some-password
                        username: exp
-           run: |
-              echo $KUBECONFIG
-
          - name: Vertify Results
            run: |
               echo "$EXPECTED_KC" > /tmp/expected_kc.json
