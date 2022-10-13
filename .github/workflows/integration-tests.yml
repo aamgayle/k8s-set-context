@@ -2,17 +2,6 @@ name: Run Integration Tests
 on: [push]
 
 jobs:
-   build-and-deploy:
-      runs-on: ubuntu-latest
-      steps:
-         - uses: azure/login@v1
-           with:
-              creds: ${{ secrets.AZURE_CREDENTIALS }}
-              environment:
-
-         - run: |
-              az webapp list --query "[?state=='Running']"
-
    AKS-method-integration-test:
       runs-on: ubuntu-latest
       steps:
@@ -40,5 +29,4 @@ jobs:
 
          - name: Vertify Results
            run: |
-              echo "$KUBECONFIG"
-              if [ "$KUBECONFIG" != "" ]; then exit 1; else echo -e "AKS Kubeconfig obtained successfully!"; fi
+              echo $KUBECONFIG
