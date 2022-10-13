@@ -110,6 +110,7 @@ export function listClusterPodsCheck() {
          .listNamespacedPod('default')
          .then((res) => {
             console.log(res.body)
+            core.debug('THESE ARE THE PODS!!!: ' + res.body)
          })
          .catch()
    } catch (e) {
