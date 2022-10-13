@@ -23,7 +23,7 @@ jobs:
          - name: Build
            run: npm run build
          - name: Set Context
-           uses: aamgayle/k8s-set-context@v1
+           uses: aamgayle/k8s-set-context@v3
            with:
               method: kubeconfig
               context: exp-scratch
@@ -66,13 +66,16 @@ jobs:
                      user:
                        password: some-password
                        username: exp
+           run: |
+              echo $KUBECONFIG
+
          - name: Vertify Results
            run: |
-              echo "$EXPECTEDKC" > /tmp/expected_kc.json
+              echo "$EXPECTED_KC" > /tmp/expected_kc.json
               DIFF=$(diff <(jq -S -c . $KUBECONFIG) <(jq -S -c . /tmp/expected_kc.json))
               if [ "$DIFF" != "" ]; then exit 1; else echo -e "Kubeconfig matches expected"; fi
            env:
-              EXPECTEDKC: |
+              EXPECTED_KC: |
                  {
                      "apiVersion": "v1",
                      "clusters": [
