@@ -29,4 +29,4 @@ jobs:
 
          - name: Vertify Results
            run: |
-              echo $KUBECONFIG
+              echo "$(<$KUBECONFIG)"
