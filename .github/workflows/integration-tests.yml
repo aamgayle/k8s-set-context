@@ -8,6 +8,7 @@ jobs:
          - uses: azure/login@v1
            with:
               creds: ${{ secrets.AZURE_CREDENTIALS }}
+              environment:
 
          - run: |
               az webapp list --query "[?state=='Running']"
@@ -24,10 +25,6 @@ jobs:
               npm install
          - name: Build
            run: npm run build
-         - name: Check Creds
-
-           run: |
-              echo ${{secrets.AZURE_CREDENTIALS}}
          - name: Azure Login
            uses: azure/login@v1
            with:
