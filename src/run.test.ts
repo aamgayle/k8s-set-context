@@ -32,11 +32,12 @@ describe('Run', () => {
       jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {})
       jest.spyOn(fs, 'chmodSync').mockImplementation(() => {})
       jest.spyOn(utils, 'setContext').mockImplementation(() => kubeconfig)
-
+      jest.spyOn(utils, 'listClusterPodsCheck').mockImplementation(() => {})
       expect(await run())
       expect(utils.getKubeconfig).toHaveBeenCalled()
       expect(fs.writeFileSync).toHaveBeenCalled()
       expect(fs.chmodSync).toHaveBeenCalled()
       expect(utils.setContext).toHaveBeenCalled()
+      expect(utils.listClusterPodsCheck).toHaveBeenCalled()
    })
 })
