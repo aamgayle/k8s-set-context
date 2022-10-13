@@ -160,7 +160,8 @@ jobs:
               environment: 'AKS-SET-CONTEXT'
            run: |
               echo ${{secrets.AZURE_CREDENTIALS}}
-         - uses: azure/login@v1
+         - name: Azure Login
+           uses: azure/login@v1
            with:
               creds: ${{ secrets.AZURE_CREDENTIALS }}
               environment: 'AKS-SET-CONTEXT'
