@@ -110,9 +110,10 @@ export function listClusterPodsCheck() {
          .listNamespacedPod('default')
          .then((res) => {
             console.log(res.body)
+            core.debug('PODS FOR TESTS!!!: \n' + res.body)
          })
          .catch()
    } catch (e) {
-      throw Error('Could not list cluster pods. Exiting...')
+      throw Error('Could not list cluster pods. Exting...')
    }
 }
