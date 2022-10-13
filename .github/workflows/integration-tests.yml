@@ -142,3 +142,32 @@ jobs:
                          }
                      ]
                  }
+   AKS-method-integration-test:
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout Source Code
+           id: checkout-code
+           uses: actions/checkout@v2
+         - name: Npm Install and Build
+           id: npm-build
+           run: |
+              npm install
+         - name: Build
+           run: npm run build
+         - uses: azure/login@v1
+           with:
+              creds: ${{ secrets.AZURE_CREDENTIALS }}
+              environment: 'AKS-SET-CONTEXT'
+         - name: Set Context
+           uses: aamgayle/k8s-set-context@v4.6
+           with:
+              resource-group: 'asgayle-test2'
+              cluster-type: 'aks'
+              method: 'service-principal'
+              cluster-name: 'testCluster'
+              admin: 'true'
+
+         - name: Vertify Results
+           run: |
+              echo "$KUBECONFIG"
+              if [ "$KUBECONFIG" != "" ]; then exit 1; else echo -e "AKS Kubeconfig obtained successfully!"; fi
