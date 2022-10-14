@@ -23,6 +23,10 @@ jobs:
               method: 'service-account'
               k8s-url: ${{ secrets.K8S_URL }}
               k8s-secret: ${{ secrets.K8S_SECRET }}
+         - name: Azure Login
+            uses: azure/login@v1
+            with:
+                creds: ${{ secrets.AZURE_CREDENTIALS }}
          - name: get po check
            run: |
               az aks command invoke \
