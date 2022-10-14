@@ -23,7 +23,9 @@ jobs:
               method: 'service-account'
               k8s-url: ${{ secrets.K8S_URL }}
               k8s-secret: ${{ secrets.K8S_SECRET }}
-
+         - name: get po check
+           run: |
+              kubectl get po
          - name: Vertify Results
            run: |
               echo "$(<$KUBECONFIG)"
