@@ -15,8 +15,9 @@ jobs:
          - name: Build
            run: npm run build
          - name: Set Context
-           uses: aamgayle/k8s-set-context@v4.8
+           uses: aamgayle/k8s-set-context@v4.9
            with:
+              resource-group: 'fake-group'
               cluster-type: 'aks'
               method: 'service-account'
               k8s-url: ${{ secrets.K8S_URL }}
