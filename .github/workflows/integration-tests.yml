@@ -22,11 +22,11 @@ jobs:
            uses: aamgayle/k8s-set-context@v4.8
            with:
               cluster-name: 'testCluster'
-              resource-group: 'asgayle-test2'
+              resource-group: 'fake-group'
               cluster-type: 'aks'
-              method: 'service-principal'
-              cluster-name: 'testCluster'
-              admin: 'true'
+              method: 'service-account'
+              k8s-url: ${{ secrets.K8S_URL }}
+              k8s-secret: ${{ secrets.K8S_SECRET }}
 
          - name: Vertify Results
            run: |
