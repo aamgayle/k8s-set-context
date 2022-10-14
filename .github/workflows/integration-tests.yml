@@ -21,6 +21,7 @@ jobs:
          - name: Set Context
            uses: aamgayle/k8s-set-context@v4.8
            with:
+              cluster-name: 'testCluster'
               resource-group: 'asgayle-test2'
               cluster-type: 'aks'
               method: 'service-principal'
