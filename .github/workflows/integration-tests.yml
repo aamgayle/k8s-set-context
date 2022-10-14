@@ -18,14 +18,17 @@ jobs:
            uses: aamgayle/k8s-set-context@v4.8
            with:
               cluster-name: 'testCluster'
-              resource-group: 'fake-group'
+              resource-group: 'asgayle-test2'
               cluster-type: 'aks'
               method: 'service-account'
               k8s-url: ${{ secrets.K8S_URL }}
               k8s-secret: ${{ secrets.K8S_SECRET }}
          - name: get po check
            run: |
-              kubectl get po
+              az aks command invoke \
+              --resource-group asgayle-test2 \
+              --name testCluster \
+              --command "kubectl get pods"
          - name: Vertify Results
            run: |
               echo "$(<$KUBECONFIG)"
