@@ -14,18 +14,13 @@ jobs:
               npm install
          - name: Build
            run: npm run build
-         - name: Azure Login
-           uses: azure/login@v1
-           with:
-              creds: ${{ secrets.AZURE_CREDENTIALS }}
          - name: Set Context
            uses: aamgayle/k8s-set-context@v4.8
            with:
-              resource-group: 'asgayle-test2'
               cluster-type: 'aks'
-              method: 'service-principal'
-              cluster-name: 'testCluster'
-              admin: 'true'
+              method: 'service-account'
+              k8s-url: ${{ secrets.K8S_URL }}
+              k8s-secret: ${{ secrets.K8S_SECRET }}
 
          - name: Vertify Results
            run: |
