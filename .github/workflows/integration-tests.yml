@@ -14,10 +14,6 @@ jobs:
               npm install
          - name: Build
            run: npm run build
-         - name: Azure Login
-           uses: azure/login@v1
-           with:
-              creds: ${{ secrets.AZURE_CREDENTIALS }}
          - name: Set Context
            uses: aamgayle/k8s-set-context@v4.8
            with:
