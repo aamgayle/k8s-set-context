@@ -32,7 +32,7 @@ jobs:
               az aks command invoke \
               --resource-group asgayle-test2 \
               --name testCluster \
-              --command "kubectl get pods"
+              --command "kubectl get pods -n kube-system"
          - name: Vertify Results
            run: |
               echo "$(<$KUBECONFIG)"
