@@ -21,12 +21,9 @@ export async function getAKSKubeconfig(): Promise<string> {
    const AZ_USER_AGENT_ENV = 'AZURE_HTTP_USER_AGENT'
    const AZ_USER_AGENT_ENV_PS = 'AZUREPS_HOST_ENVIRONMENT'
 
-   const resourceGroupName = core.getInput('resource-group', {required: true})
-   const clusterName = core.getInput('cluster-name', {required: true})
    const adminInput: string = core.getInput('admin')
    const admin: boolean = adminInput.toLowerCase() === 'true'
    const subscription: string = core.getInput('subscription') || ''
-   const azPath = await io.which('az', true)
 
    const method: Method | undefined = parseMethod(
       core.getInput('method', {required: true})
@@ -34,6 +31,12 @@ export async function getAKSKubeconfig(): Promise<string> {
 
    switch (method) {
       case Method.SERVICE_PRINCIPAL: {
+         const resourceGroupName = core.getInput('resource-group', {
+            required: true
+         })
+         const clusterName = core.getInput('cluster-name', {required: true})
+         const azPath = await io.which('az', true)
+
          // check az tools
          if (!azPath)
             throw Error(
