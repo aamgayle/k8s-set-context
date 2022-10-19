@@ -100,6 +100,7 @@ export function createKubeconfig(
 }
 
 export function listClusterPodsCheck() {
+   core.debug('Checking cluster connection...')
    const kc = new k8s.KubeConfig()
    kc.loadFromDefault()
 
@@ -110,10 +111,10 @@ export function listClusterPodsCheck() {
          .listNamespacedPod('default')
          .then((res) => {
             console.log(res.body)
-            core.debug('PODS FOR TESTS!!!: \n' + res.body)
+            core.debug('THESE ARE THE PODS!!!: ' + res.body)
          })
          .catch()
    } catch (e) {
-      throw Error('Could not list cluster pods. Exting...')
+      throw Error('Could not list cluster pods. Exiting...')
    }
 }
